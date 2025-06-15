@@ -24,26 +24,26 @@ def parse_args(argv):
     return args
 
 def main(args):
-    filePaths = recLister(args.root_folder)
+    file_paths = recLister(args.root_folder)
     with open(args.csv_dest+"output.csv","w") as output:
-        for filePath in filePaths:
-            split = os.path.split(filePath)
+        for file_path in file_paths:
+            split = os.path.split(file_path)
             output.write(split[0]+", "+split[1]+"\n")
 
 
-def recLister(rootPath):
-    directories = os.listdir(rootPath)
-    retValue = []
+def recLister(root_path):
+    directories = os.listdir(root_path)
+    ret_value = []
 
     for item in directories:
-        if os.path.isdir(os.path.join(rootPath, item)):
-            dirFiles = recLister(os.path.join(rootPath, item))
-            for file in dirFiles:
-                retValue.append(os.path.join(item, file))
-        elif os.path.isfile(os.path.join(rootPath, item)):
-            retValue.append(item)
+        if os.path.isdir(os.path.join(root_path, item)):
+            dir_files = recLister(os.path.join(root_path, item))
+            for file in dir_files:
+                ret_value.append(os.path.join(item, file))
+        elif os.path.isfile(os.path.join(root_path, item)):
+            ret_value.append(item)
 
-    return retValue
+    return ret_value
 
 
 if __name__ == "__main__":
